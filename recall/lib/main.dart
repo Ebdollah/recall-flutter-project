@@ -1,20 +1,38 @@
 import 'package:flutter/material.dart';
-import 'splash_screen.dart'; // Import the SplashScreen widget
+import 'splash_screen.dart';
+import 'user_provider.dart'; // Import UserProvider
 
 void main() {
   runApp(MyApp());
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
+  @override
+  _MyAppState createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  String? _userName;
+
+  void _updateUserName(String name) {
+    setState(() {
+      _userName = name;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Recall',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
+    return UserProvider(
+      userName: _userName,
+      updateUserName: _updateUserName,
+      child: MaterialApp(
+        title: 'Recall',
+        theme: ThemeData(
+          primarySwatch: Colors.blue,
+        ),
+        home: SplashScreen(),
+        debugShowCheckedModeBanner: false,
       ),
-      home: SplashScreen(), // Set SplashScreen as the initial screen
-      debugShowCheckedModeBanner: false, // Remove the debug banner
     );
   }
 }
