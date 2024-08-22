@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'user_provider.dart'; // Import UserProvider
+import 'main_app_screen.dart'; // Import MainAppScreen
 
 class HomeScreen extends StatelessWidget {
   final TextEditingController _nameController = TextEditingController();
@@ -37,6 +38,12 @@ class HomeScreen extends StatelessWidget {
               ElevatedButton(
                 onPressed: () {
                   userProvider?.updateUserName(_nameController.text);
+                  Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => MainAppScreen(),
+                    ),
+                  );
                 },
                 child: Text('Submit'),
               ),
